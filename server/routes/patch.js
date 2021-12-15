@@ -5,7 +5,6 @@ const fs_surfer = require('child_process')
 const util = require('util');
 const shell = util.promisify(fs_surfer.exec)
 const multer = require('multer')
-const upload = multer({ dest: config.PDPATCH_PATH })
 
 //router.use(multer({ dest: config.PDPATCH_PATH }))
 //router.use(multer)
@@ -29,14 +28,39 @@ router.get('/', (req, res) => {
 })
 
 router.get('/patch', (req, res) => {
-    res.json(config.NOT_YET_IMPLEMENTED)
+    console.log(req.query)
+    if (!req.query.filename) {
+        res.json({ code: "MISSING_FILENAME" })
+        return
+    }
+
+    const { filename } = req.query
+    console.log("IL FILE E':", filename)
+    res.download(`${config.PDPATCH_PATH}/${filename}`)
 })
 
-router.post('/', upload.single("ciao"), (req, res) => {
-    //const options = { root: "public" }
-    //res.sendFile("images/test.jpg", options)
-    //console.dir(req.files)
-    res.json(config.NOT_YET_IMPLEMENTED)
+
+
+const storage = multer.diskStorage({
+    destination: function(req, file, dest) {
+        dest(null, config.PDPATCH_PATH)
+    },
+    filename: function(req, file, dest) {
+        //const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9)
+        dest(null, file.originalname)
+    }
+})
+
+const upload = multer({ storage: storage })
+
+router.post('/upload', upload.single("filename"), (req, res) => {
+    console.log(req)
+    res.json({
+        filename: req.file.filename,
+        location: config.PDPATCH_PATH,
+        size: req.file.size,
+        mimetype: req.file.mimetype
+    })
 })
 
 module.exports = router;

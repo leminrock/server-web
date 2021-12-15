@@ -6,14 +6,12 @@ graph {
         getwifilist[label="{{GET|/}|{query: null|get all available networks}}"];
         getconnected[label="{{GET|/connected}|{query: null|get connected network if exists}}"]
         postconnection[label="{{POST|/connection}|{body: ssid, password|send connection parameters}}"]
-        wifi -- getwifilist;
-        wifi -- getconnected;
-        wifi -- postconnection;
+        wifi -- { getwifilist getconnected postconnection };
     }
 
     subgraph {
         patch[label="patch"];
-        postpatch[label="{{POST|/}|{body: FILE.pd|send pd file in multipart}}"];
+        postpatch[label="{{POST|/upload}|{body: FILE.pd|send pd file in multipart}}"];
         getallpatch[label="{{GET|/}|{query: null|get all patches from rockpis}}"];
         getpatch[label="{{GET|/patch}|{query: filename|get pd file from rockpis}}"];
         patch -- { postpatch getallpatch getpatch };
