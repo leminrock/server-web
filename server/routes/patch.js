@@ -54,7 +54,8 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage })
 
 router.post('/upload', upload.single("filename"), (req, res) => {
-    console.log(req)
+    console.log(req.body)
+    console.log(req.file)
     res.json({
         filename: req.file.filename,
         location: config.PDPATCH_PATH,
