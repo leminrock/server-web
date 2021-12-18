@@ -6,8 +6,7 @@ const util = require('util');
 const shell = util.promisify(fs_surfer.exec)
 const multer = require('multer')
 
-//router.use(multer({ dest: config.PDPATCH_PATH }))
-//router.use(multer)
+
 /*
 get all patches
 */
