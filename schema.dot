@@ -16,4 +16,10 @@ graph {
         getpatch[label="{{GET|/patch}|{query: filename|get pd file from rockpis}}"];
         patch -- { postpatch getallpatch getpatch };
     }
+
+    subgraph {
+        mbuto[label="mbuto]
+        vulvia[label="vulvia"]
+        mbuto -- vulvia 
+    }
 }
