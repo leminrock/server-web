@@ -30,6 +30,8 @@ jobs:
         run: |
           sudo apt install graphviz
           circo -Tpdf schema.dot -O
+          git config --global user.email "elettrochuck@gmail.com"
+          git config --global user.name "franeum"
           git add .
           git commit -m "update pdf"
           git push
