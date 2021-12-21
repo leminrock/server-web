@@ -27,4 +27,4 @@ jobs:
 
       # Runs a single command using the runners shell
       - name: Run a one-line script
-        run: apt install graphviz && circo -Tpdf schema.dot -O
+        run: sudo apt install graphviz && circo -Tpdf schema.dot -O
