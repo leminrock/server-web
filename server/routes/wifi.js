@@ -11,17 +11,19 @@ router.get('/', (req, res) => {
 })
 
 router.get('/connected', (req, res) => {
-    network
-        .getWifiList(true)
+    network.getWifiList(true)
         .then((data) => {
+            let format_response = undefined
+
             data.forEach(elem => {
                 if (elem.inUseBoolean == true) {
-                    res.json(elem)
-                    return -1
+                    format_response = elem
                 }
             })
-
-            res.json({ code: "NOT_CONNECTED" })
+            if (format_response)
+                res.json(format_response)
+            else
+                res.json({ code: "NOT_CONNECTED" })
         })
         .catch((error) => res.json(error))
 })
