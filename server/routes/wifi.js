@@ -1,7 +1,7 @@
-const express = require('express');
-const router = express.Router();
+const express = require('express')
+const router = express.Router()
 const config = require('../config/config')
-const network = require("node-network-manager");
+const network = require("node-network-manager")
 
 router.get('/', (req, res) => {
     network
@@ -17,7 +17,7 @@ router.get('/connected', (req, res) => {
             data.forEach(elem => {
                 if (elem.inUseBoolean == true) {
                     res.json(elem)
-                    return
+                    return -1
                 }
             })
 
@@ -40,4 +40,4 @@ router.post('/connection', (req, res) => {
     res.json(config.NOT_YET_IMPLEMENTED)
 })
 
-module.exports = router;
+module.exports = router
