@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const config = require('../config/config')
-const network = require("node-network-manager");
+const network = require("node-network-manager")
 
 router.get('/', (req, res) => {
     network
