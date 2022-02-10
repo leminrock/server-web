@@ -10,7 +10,7 @@ pipeline {
         }
         stage('ServerRun') {
             steps {
-                sh 'cd server; npm run dev'
+                sh 'cd server; PORT=8000 npm run dev'
             }
         }
     }
